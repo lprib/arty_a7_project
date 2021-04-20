@@ -1,0 +1,3 @@
+#!/bin/bash
+
+vivado -nolog -nojournal -mode batch -source ./build_scripts/${1}.tcl
