@@ -8,9 +8,10 @@
     },
     "tasks": [
         {
-            "label": "Check Syntax",
+            "label": "Check Syntax (Vivado)",
             "type": "shell",
             "command": "./build check",
+            "group": "build",
             "problemMatcher": {
                 "owner": "external",
                 "severity": "error",
@@ -25,11 +26,28 @@
                     "location": 3
                 }
             },
-            "group": "build",
             // "group": {
             //     "kind": "build",
             //     "isDefault": true
             // }
+        },
+        {
+            "label": "Check Syntax (GHDL)",
+            "type": "shell",
+            "command": "./ghdl_check",
+            "group": "build",
+            "problemMatcher": {
+                "owner": "external",
+                "severity": "error",
+                "fileLocation": "relative",
+                "pattern": {
+                    "regexp": "^(.*):(.*):(.*):error: (.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 4
+                }
+            }
         },
         {
             "label": "View RTL",

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Run GHDL analysis on files for syntax checking
+
+for f in ./src/*.vhd; do
+    # TODO enable VHDL2008 syntax (currently not linking ieee libraries properly)
+    ghdl -a $f
+done

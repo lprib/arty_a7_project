@@ -3,3 +3,5 @@ out/
 usage_statistics_webtalk.html
 usage_statistics_webtalk.xml
 vivado*.str
+# GHDL library files
+work*.cf
