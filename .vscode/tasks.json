@@ -17,61 +17,69 @@
                 "severity": "error",
                 "fileLocation": "absolute",
                 "pattern": {
-                    // Match Vivado check_syntax tcl output
-                    // TODO are there other error types than CRIT WARNING
                     "regexp": "^CRITICAL WARNING: \\[.*\\] (.*) \\[(.*):(.*)\\]$",
                     "message": 1,
                     "file": 2,
-                    // "line": 3,
                     "location": 3
                 }
-            },
-            // "group": {
-            //     "kind": "build",
-            //     "isDefault": true
-            // }
+            }
         },
         {
             "label": "Check Syntax (GHDL)",
             "type": "shell",
             "command": "./ghdl_check",
             "group": "build",
-            "problemMatcher": {
-                "owner": "external",
-                "severity": "error",
-                "fileLocation": "relative",
-                "pattern": {
-                    "regexp": "^(.*):(.*):(.*):error: (.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "message": 4
+            "problemMatcher": [
+                {
+                    "owner": "external",
+                    "severity": "error",
+                    "fileLocation": "relative",
+                    "pattern": {
+                        "regexp": "^(.*):(.*):(.*):error: (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "message": 4
+                    }
+                },
+                {
+                    "owner": "external",
+                    "severity": "warning",
+                    "fileLocation": "relative",
+                    "pattern": {
+                        "regexp": "^(.*):(.*):(.*):warning: (.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "message": 4
+                    }
                 }
-            }
+            ]
         },
         {
             "label": "View RTL",
             "type": "shell",
             "command": "./build rtl",
             "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "Synthesize",
             "type": "shell",
             "command": "./build synth",
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "Program",
             "type": "shell",
             "command": "./build program",
-            "group": "build",
+            "group": "build"
         },
         {
             "label": "Synthesize & Program",
             "type": "shell",
             "command": "./build synth_program",
-            "group": "build",
+            "group": "build"
         }
     ]
 }

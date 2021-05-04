@@ -1,35 +1,23 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use work.components.all;
 
 entity main is
     port (
         CLK100MHZ: in std_logic;
         led0_r: out std_logic;
         led0_g: out std_logic;
-        led0_b: out std_logic
-     );
+        led0_b: out std_logic;
+        VGA_R: out std_logic_vector(3 downto 0);
+        VGA_G: out std_logic_vector(3 downto 0);
+        VGA_B: out std_logic_vector(3 downto 0);
+        VGA_HS_O: out std_logic;
+        VGA_VS_O: out std_logic
+    );
 end main;
 
 architecture Behavioral of main is
-    component clock_div is
-        generic (
-            divisor: natural
-        );
-        port (
-            clk: in std_logic;
-            div: out std_logic
-        );
-    end component;
-
-    component pwm is
-        port (
-            clk: in std_logic;
-            duty: in unsigned(10 downto 0);
-            pwm_out: out std_logic
-        );
-    end component;
-
     signal dutyr: unsigned(9 downto 0) := to_unsigned(0, 10);
     signal dutyg: unsigned(9 downto 0) := to_unsigned(350, 10);
     signal dutyb: unsigned(9 downto 0) := to_unsigned(700, 10);
@@ -42,6 +30,19 @@ architecture Behavioral of main is
     signal g: std_logic;
     signal b: std_logic;
 begin
+    myram: ram
+    generic map (
+        ITEM_WIDTH => 32,
+        SIZE => 128
+    )
+    port map (
+        CLK100MHZ,
+        '0',
+        0,
+        0,
+        (others => '0')
+    );
+
     led0_b <= b;
     led0_g <= g;
     led0_r <= r;
@@ -49,6 +50,15 @@ begin
     dr(9 downto 0) <= dutyr;
     dg(9 downto 0) <= dutyg;
     db(9 downto 0) <= dutyb;
+
+    v: vga port map (
+        clk => CLK100MHZ,
+        hsync_out => VGA_HS_O,
+        vsync_out => VGA_VS_O,
+        r_out => VGA_R,
+        g_out => VGA_G,
+        b_out => VGA_B
+    );
 
 
     dd: clock_div
