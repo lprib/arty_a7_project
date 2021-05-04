@@ -1,0 +1,59 @@
+{
+    "version": "2.0.0",
+    "options": {
+        "env": {
+            // VSCode tasks don't source .zshrc, so we must add vivado to the path here
+            "PATH": "/home/liam/Applications/xilinx/Vivado/2020.2/bin:${env:PATH}"
+        }
+    },
+    "tasks": [
+        {
+            "label": "Check Syntax",
+            "type": "shell",
+            "command": "./build check",
+            "problemMatcher": {
+                "owner": "external",
+                "severity": "error",
+                "fileLocation": "absolute",
+                "pattern": {
+                    // Match Vivado check_syntax tcl output
+                    // TODO are there other error types than CRIT WARNING
+                    "regexp": "^CRITICAL WARNING: \\[.*\\] (.*) \\[(.*):(.*)\\]$",
+                    "message": 1,
+                    "file": 2,
+                    // "line": 3,
+                    "location": 3
+                }
+            },
+            "group": "build",
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+        },
+        {
+            "label": "View RTL",
+            "type": "shell",
+            "command": "./build rtl",
+            "group": "build",
+        },
+        {
+            "label": "Synthesize",
+            "type": "shell",
+            "command": "./build synth",
+            "group": "build",
+        },
+        {
+            "label": "Program",
+            "type": "shell",
+            "command": "./build program",
+            "group": "build",
+        },
+        {
+            "label": "Synthesize & Program",
+            "type": "shell",
+            "command": "./build synth_program",
+            "group": "build",
+        }
+    ]
+}

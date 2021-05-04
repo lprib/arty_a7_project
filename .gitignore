@@ -2,3 +2,4 @@ out/
 .Xil/
 usage_statistics_webtalk.html
 usage_statistics_webtalk.xml
+vivado*.str
