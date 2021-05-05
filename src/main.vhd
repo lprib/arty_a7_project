@@ -29,6 +29,8 @@ architecture Behavioral of main is
     signal r: std_logic;
     signal g: std_logic;
     signal b: std_logic;
+
+    signal fast_clk: std_logic;
 begin
     myram: ram
     generic map (
@@ -71,29 +73,39 @@ begin
         divisor => 180000
     )
     port map (
-        clk => CLK100MHZ,
+        clk => fast_clk,
         div => change_pwm
     );
 
     pp: pwm port map (
-        clk => CLK100MHZ,
+        clk => fast_clk,
         duty => dr,
         pwm_out => r
     );
     pp1: pwm port map (
-        clk => CLK100MHZ,
+        clk => fast_clk,
         duty => dg,
         pwm_out => g
     );
     pp2: pwm port map (
-        clk => CLK100MHZ,
+        clk => fast_clk,
         duty => db,
         pwm_out => b
     );
 
-    do_pwm: process(CLK100MHZ)
+    mypll: pll
+    generic map (
+        div_amount => 5,
+        mult_amount => 10
+    )
+    port map (
+        clk_in => CLK100MHZ,
+        clk_out => fast_clk
+    );
+
+    do_pwm: process(fast_clk)
     begin
-        if rising_edge(CLK100MHZ) then
+        if rising_edge(fast_clk) then
             if prev_change_pwm = '0' and change_pwm = '1' then
                 dutyr <= dutyr + 1;
                 dutyg <= dutyg + 1;

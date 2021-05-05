@@ -5,3 +5,4 @@ usage_statistics_webtalk.xml
 vivado*.str
 # GHDL library files
 work*.cf
+FinalUnmatchedCellsToUnplace.txt

@@ -30,7 +30,7 @@
             "command": "./ghdl_check",
             "group": "build",
             "presentation": {
-                "reveal": "never",
+                "reveal": "never"
             },
             "problemMatcher": [
                 {
@@ -70,25 +70,29 @@
             "label": "Synthesize",
             "type": "shell",
             "command": "./build synth",
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "Program",
             "type": "shell",
             "command": "./build program",
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "Synthesize and Show Schematic",
             "type": "shell",
             "command": "./build synth_schematic",
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         },
         {
             "label": "Synthesize & Program",
             "type": "shell",
             "command": "./build synth_program",
-            "group": "build"
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }

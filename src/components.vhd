@@ -3,6 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 package components is
+    attribute dont_touch: string;
+
     component clock_div is
         generic (
             divisor: natural
@@ -59,7 +61,20 @@ package components is
             screen_bit: out std_logic
         );
     end component;
-    attribute dont_touch: string;
     attribute dont_touch of buffered_vga: component is "yes";
+
+    component pll is
+        generic (
+            div_amount: natural range 1 to 128;
+            mult_amount: natural range 2 to 64;
+            -- default: 100MHz
+            clk_in_period_ns: real := 10.0
+        );
+        port (
+            clk_in: in std_logic;
+            clk_out: out std_logic
+        );
+    end component;
+    attribute dont_touch of pll: component is "yes";
 
 end package components;
