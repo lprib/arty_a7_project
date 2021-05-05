@@ -47,6 +47,19 @@ package components is
         );
     end component;
 
-    -- attribute dont_touch: string;
-    -- attribute dont_touch of ram: component is "yes";
+    component buffered_vga is
+        port (
+            clk: in std_logic;
+            write_enable: in std_logic;
+            write_addr: in natural range 0 to (80 * 60 - 1);
+            data: in std_logic_vector(7 downto 0);
+            frame_flip_strobe: out std_logic;
+            h_sync: out std_logic;
+            v_sync: out std_logic;
+            screen_bit: out std_logic
+        );
+    end component;
+    attribute dont_touch: string;
+    attribute dont_touch of buffered_vga: component is "yes";
+
 end package components;

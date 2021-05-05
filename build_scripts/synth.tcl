@@ -10,7 +10,7 @@ file mkdir $report_dir
 
 read_checkpoint -incremental -quiet $out_dir/synthed.dcp
 
-synth_design -top main -part xc7a35ticsg324-1L
+synth_design -top main -name synt_1 -part xc7a35ticsg324-1L
 opt_design
 
 write_checkpoint -force $out_dir/synthed.dcp

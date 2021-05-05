@@ -43,6 +43,11 @@ begin
         (others => '0')
     );
 
+    myvga: buffered_vga
+    port map (
+        '0', '0', 0, (others => '0')
+    );
+
     led0_b <= b;
     led0_g <= g;
     led0_r <= r;

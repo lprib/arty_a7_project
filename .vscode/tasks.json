@@ -29,6 +29,9 @@
             "type": "shell",
             "command": "./ghdl_check",
             "group": "build",
+            "presentation": {
+                "reveal": "never",
+            },
             "problemMatcher": [
                 {
                     "owner": "external",
@@ -73,6 +76,12 @@
             "label": "Program",
             "type": "shell",
             "command": "./build program",
+            "group": "build"
+        },
+        {
+            "label": "Synthesize and Show Schematic",
+            "type": "shell",
+            "command": "./build synth_schematic",
             "group": "build"
         },
         {
