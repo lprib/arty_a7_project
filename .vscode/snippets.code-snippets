@@ -1,0 +1,53 @@
+{
+	"VHDL testbench file": {
+		"prefix": [
+			"testbench"
+		],
+		"body": [
+			"library ieee;",
+			"use ieee.std_logic_1164.all;",
+			"use ieee.numeric_std.all;",
+			"${1:use work.components.all;}",
+			"",
+			"entity ${2:$TM_FILENAME_BASE} is end",
+			"",
+			"architecture test of ${2:$TM_FILENAME_BASE} is",
+			"begin",
+			"    uut: ${4:${TM_FILENAME_BASE/(.*?)_tb/$1/}}$0",
+			"end architecture test;",
+			""
+		]
+	},
+	"VHDL entity file": {
+		"prefix": [
+			"entity"
+		],
+		"body": [
+			"library ieee;",
+			"use ieee.std_logic_1164.all;",
+			"use ieee.numeric_std.all;",
+			"${1:use work.components.all;}",
+			"",
+			"entity ${2:$TM_FILENAME_BASE} is",
+			"    port (",
+			"    );",
+			"end entity ${2:$TM_FILENAME_BASE};",
+			"",
+			"architecture $3 of ${2:$TM_FILENAME_BASE} is",
+			"begin",
+			"    $0",
+			"end architecture $3;",
+			""
+		]
+	},
+	"Component with copied ports": {
+		"prefix": [
+			"component"
+		],
+		"body": [
+			"component $1 is",
+			"$0$CLIPBOARD",
+			"end component;"
+		]
+	}
+}
