@@ -19,7 +19,7 @@ end entity ram;
 
 architecture behav of ram is
     type ram_t is array(SIZE - 1 downto 0) of std_logic_vector(ITEM_WIDTH - 1 downto 0);
-    signal ram_array: ram_t;
+    signal ram_array: ram_t := (others => std_logic_vector(to_unsigned(2#10101110#, ITEM_WIDTH)));
 begin
     main: process(clk)
     begin

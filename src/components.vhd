@@ -15,6 +15,16 @@ package components is
         );
     end component;
 
+    component pulse_clock_div is
+        generic (
+            divisor: natural
+        );
+        port (
+            clk: in std_logic;
+            div: out std_logic
+        );
+    end component;
+
     component pwm is
         port (
             clk: in std_logic;
@@ -33,7 +43,7 @@ package components is
             b_out: out std_logic_vector(3 downto 0)
         );
     end component;
-    
+
     component ram is
         generic (
             ITEM_WIDTH: natural;

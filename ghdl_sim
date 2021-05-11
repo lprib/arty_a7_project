@@ -1,0 +1,11 @@
+#!/bin/bash
+
+ghdl -a ./src/components.vhd
+ghdl -a ./src/ram.vhd
+ghdl -a ./src/buffered_vga.vhd
+
+ghdl -a ./testbench/testbench_utils.vhd
+ghdl -a ./testbench/${1}.vhd
+
+ghdl -r $1 --wave=./out/${1}.ghw --assert-level=error
+gtkwave ./out/${1}.ghw ./out/${1}.gtkw

@@ -6,3 +6,4 @@ vivado*.str
 # GHDL library files
 work*.cf
 FinalUnmatchedCellsToUnplace.txt
+tags

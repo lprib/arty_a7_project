@@ -31,6 +31,7 @@ architecture Behavioral of main is
     signal b: std_logic;
 
     signal fast_clk: std_logic;
+    signal vga_screen_bit: std_logic;
 begin
     myram: ram
     generic map (
@@ -45,10 +46,20 @@ begin
         (others => '0')
     );
 
-    myvga: buffered_vga
-    port map (
-        '0', '0', 0, (others => '0')
+    VGA_R <= "1111" when vga_screen_bit = '1' else "0000";
+    VGA_G <= "1111" when vga_screen_bit = '1' else "0000";
+    VGA_B <= "1111" when vga_screen_bit = '1' else "0000";
+
+    myvga: buffered_vga port map (
+        clk => fast_clk,
+        write_enable => '0',
+        write_addr => 0,
+        data => "00000000",
+        h_sync => VGA_HS_O,
+        v_sync => VGA_VS_O,
+        screen_bit => vga_screen_bit
     );
+
 
     led0_b <= b;
     led0_g <= g;
@@ -58,14 +69,14 @@ begin
     dg(9 downto 0) <= dutyg;
     db(9 downto 0) <= dutyb;
 
-    v: vga port map (
-        clk => CLK100MHZ,
-        hsync_out => VGA_HS_O,
-        vsync_out => VGA_VS_O,
-        r_out => VGA_R,
-        g_out => VGA_G,
-        b_out => VGA_B
-    );
+    -- v: vga port map (
+        -- clk => CLK100MHZ,
+        -- hsync_out => VGA_HS_O,
+        -- vsync_out => VGA_VS_O,
+        -- r_out => VGA_R,
+        -- g_out => VGA_G,
+        -- b_out => VGA_B
+    -- );
 
 
     dd: clock_div
@@ -96,7 +107,7 @@ begin
     mypll: pll
     generic map (
         div_amount => 5,
-        mult_amount => 10
+        mult_amount => 9
     )
     port map (
         clk_in => CLK100MHZ,

@@ -9,11 +9,15 @@
 			"use ieee.numeric_std.all;",
 			"${1:use work.components.all;}",
 			"",
-			"entity ${2:$TM_FILENAME_BASE} is end",
+			"entity ${2:$TM_FILENAME_BASE} is end;",
 			"",
 			"architecture test of ${2:$TM_FILENAME_BASE} is",
 			"begin",
 			"    uut: ${4:${TM_FILENAME_BASE/(.*?)_tb/$1/}}$0",
+			"",
+			"    testmain: process is",
+			"    begin",
+			"    end process testmain;",
 			"end architecture test;",
 			""
 		]
