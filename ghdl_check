@@ -2,7 +2,9 @@
 
 # Run GHDL analysis on files for syntax checking
 
-for f in ./src/*.vhd; do
+for f in ./src/*.vhd ./src/platform_specific/testbench/*.vhd; do
+    # ignore non-existent files (eg. if a glob did not match anythin)
+    [ -f "$f" ] || continue
     # TODO enable VHDL2008 syntax (currently not linking ieee libraries properly)
     ghdl -a $f
 done
